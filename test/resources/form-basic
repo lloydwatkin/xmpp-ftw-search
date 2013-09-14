@@ -1,0 +1,12 @@
+<iq type="result"
+    from="characters.shakespeare.lit"
+    to="romeo@montague.net/home"
+    id="1">
+  <query xmlns="jabber:iq:search">
+    <instructions>Search for characters</instructions>
+    <first/>
+    <last/>
+    <nick/>
+    <email/>
+  </query>
+</iq>
