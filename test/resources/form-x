@@ -1,0 +1,27 @@
+<iq type='result'
+    from='characters.shakespeare.lit'
+    to='romeo@montague.lit/home'
+    id='1'>
+  <query xmlns='jabber:iq:search'>
+    <instructions>Search for characters</instructions>
+    <x xmlns='jabber:x:data' type='form'>
+      <title>User Directory Search</title>
+      <instructions>Please provide the following information</instructions>
+      <field type='hidden' var='FORM_TYPE'>
+        <value>jabber:iq:search</value>
+      </field>
+      <field type='text-single'
+             label='Given Name'
+             var='first'/>
+      <field type='text-single'
+             label='Family Name'
+             var='last'/>
+      <field type='list-single'
+             label='Gender'
+             var='x-gender'>
+        <option label='Male'><value>male</value></option>
+        <option label='Female'><value>female</value></option>
+      </field>
+    </x>
+  </query>
+</iq>
