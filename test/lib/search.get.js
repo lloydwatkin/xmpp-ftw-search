@@ -53,7 +53,7 @@ describe('Get search form', function() {
         socket.emit('xmpp.search.get', {}, true)
     })
 
-    it('Errors if no content key provided', function(done) {
+    it('Errors if no \'to\' key provided', function(done) {
         var request = {}
         xmpp.once('stanza', function() {
             done('Unexpected outgoing stanza')

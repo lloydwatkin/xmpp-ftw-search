@@ -1,0 +1,33 @@
+<iq type="result"
+    from="characters.shakespeare.lit"
+    to="romeo@montague.lit/home"
+    id="4">
+  <query xmlns="jabber:iq:search">
+    <x xmlns="jabber:x:data" type="result">
+      <field type="hidden" var="FORM_TYPE">
+        <value>jabber:iq:search</value>
+      </field>
+      <reported>
+        <field var="first" label="Given Name" type="text-single"/>
+        <field var="last" label="Family Name" type="text-single"/>
+        <field var="jid" label="Jabber ID" type="jid-single"/>
+        <field var="tags" label="Tags" type="text-multi"/>
+      </reported>
+      <item>
+        <field var="first"><value>Benvolio</value></field>
+        <field var="last"><value>Montague</value></field>
+        <field var="jid"><value>benvolio@montague.net</value></field>
+        <field var="tags"><value>friend</value></field>
+      </item>
+      <item>
+        <field var="first"><value>Romeo</value></field>
+        <field var="last"><value>Montague</value></field>
+        <field var="jid"><value>romeo@montague.net</value></field>
+        <field var="tags">
+            <value>friend</value>
+            <value>lover</value>
+        </field>
+      </item>
+    </x>
+  </query>
+</iq>
