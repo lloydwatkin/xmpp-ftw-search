@@ -27,7 +27,7 @@ describe('Incoming messages', function() {
     describe('Handles', function() {
         
         it('Returns false', function() {
-            avatar.handles(ltx.parse('<iq/>')).should.be.false
+            search.handles(ltx.parse('<iq/>')).should.be.false
         })
     })
     
