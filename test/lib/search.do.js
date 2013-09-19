@@ -25,7 +25,6 @@ describe('Perform search', function() {
         search.init(manager)
     })
 
-
     it('Errors if no callback provided', function(done) {
         xmpp.once('stanza', function() {
             done('Unexpected outgoing stanza')
@@ -225,7 +224,7 @@ describe('Perform search', function() {
         var callback = function(error, data) {
             should.not.exist(error)
             data.should.eql({
-               fields: [],
+               fields: {},
                results: []
             })
             done()
@@ -247,17 +246,17 @@ describe('Perform search', function() {
         })
         var callback = function(error, data) {
             should.not.exist(error)
-            arrayCount(data.fields).should.equal(4)
-            data.fields['first'].should.eql({
+            Object.keys(data.fields).length.should.equal(4)
+            data.fields.first.should.eql({
                 label: 'Given Name', type: 'text-single'
             })
-            data.fields['last'].should.eql({
+            data.fields.last.should.eql({
                 label: 'Family Name', type: 'text-single'
             })
-            data.fields['jid'].should.eql({
+            data.fields.jid.should.eql({
                 label: 'Jabber ID', type: 'jid-single'
             })    
-            data.fields['tags'].should.eql({
+            data.fields.tags.should.eql({
                 label: 'Tags', type: 'text-multi'
             })
             
@@ -285,12 +284,5 @@ describe('Perform search', function() {
             callback
         )
     })
-    
-    var arrayCount = function(array) {
-        var count = 0
-        for (var i in array)
-            ++count
-        return count
-    }
     
 })
