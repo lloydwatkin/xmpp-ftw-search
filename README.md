@@ -24,3 +24,7 @@ npm i --save xmpp-ftw-search
 ```
 npm test
 ```
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/xmpp-ftw/xmpp-ftw-search/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
