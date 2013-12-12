@@ -1,3 +1,5 @@
+'use strict';
+
 var should   = require('should')
   , Search   = require('../../lib/search')
   , ltx      = require('ltx')
@@ -75,7 +77,7 @@ describe('Perform search', function() {
             callback
         )
     })
-    
+
     it('Errors if no \'basic\' or \'form\' key provided', function(done) {
         var request = { to: 'characters.shakespeare.lit' }
         xmpp.once('stanza', function() {
@@ -96,9 +98,9 @@ describe('Perform search', function() {
             callback
         )
     })
-    
+
     describe('Basic form search', function() {
-        
+
         it('Sends expected stanza', function(done) {
             var request = {
                 to: 'characters.shakespeare.lit',
@@ -124,11 +126,11 @@ describe('Perform search', function() {
                 function() {}
             )
         })
-        
+
     })
-    
+
     describe('Extensible form search', function() {
-        
+
         it('Errors unparsable data form details', function(done) {
             var request = {
                 to: 'characters.shakespeare.lit',
@@ -148,7 +150,7 @@ describe('Perform search', function() {
                 callback
             )
         })
-        
+
         it('Sends expected stanza', function(done) {
             var request = {
                 to: 'characters.shakespeare.lit',
@@ -166,23 +168,23 @@ describe('Perform search', function() {
                     .getChild('x', dataForm.NS)
                 form.should.exist
                 form.children.length.should.equal(3)
-                
+
                 form.children[0].getName().should.equal('field')
                 form.children[0].attrs.var.should.equal('FORM_TYPE')
                 form.children[0].getChildText('value').should.equal(search.NS)
-                
+
                 form.children[1].getName().should.equal('field')
                 form.children[1].attrs.var
                     .should.equal(request.form[0].var)
                 form.children[1].getChildText('value')
                     .should.equal(request.form[0].value)
-                
+
                 form.children[2].getName().should.equal('field')
                 form.children[2].attrs.var
                     .should.equal(request.form[1].var)
                 form.children[2].getChildText('value')
                     .should.equal(request.form[1].value)
-                
+
                 done()
             })
             socket.emit(
@@ -191,9 +193,9 @@ describe('Perform search', function() {
                 function() {}
             )
         })
-        
+
     })
-    
+
     it('Handles error response', function(done) {
         xmpp.once('stanza', function() {
             manager.makeCallback(helper.getStanza('iq-error'))
@@ -206,9 +208,9 @@ describe('Perform search', function() {
             })
             done()
         }
-        var request = { 
+        var request = {
             to: 'characters.shakespeare.lit',
-            basic: { first: 'romeo' }            
+            basic: { first: 'romeo' }
         }
         socket.emit(
             'xmpp.search.do',
@@ -216,7 +218,7 @@ describe('Perform search', function() {
             callback
         )
     })
-    
+
     it('Handles no results', function(done) {
         xmpp.once('stanza', function() {
             manager.makeCallback(helper.getStanza('no-results'))
@@ -229,9 +231,9 @@ describe('Perform search', function() {
             })
             done()
         }
-        var request = { 
+        var request = {
             to: 'characters.shakespeare.lit',
-            basic: { first: 'romeo' }            
+            basic: { first: 'romeo' }
         }
         socket.emit(
             'xmpp.search.do',
@@ -239,7 +241,7 @@ describe('Perform search', function() {
             callback
         )
     })
-    
+
     it('Returns results in expected format', function(done) {
         xmpp.once('stanza', function() {
             manager.makeCallback(helper.getStanza('search-results'))
@@ -255,28 +257,28 @@ describe('Perform search', function() {
             })
             data.fields.jid.should.eql({
                 label: 'Jabber ID', type: 'jid-single'
-            })    
+            })
             data.fields.tags.should.eql({
                 label: 'Tags', type: 'text-multi'
             })
-            
+
             data.results.length.should.equal(2)
             data.results[0]['first'].should.equal('Benvolio')
             data.results[0]['last'].should.equal('Montague')
             data.results[0]['jid'].should.equal('benvolio@montague.net')
             data.results[0]['tags'].should.eql(['friend'])
-            
+
             data.results.length.should.equal(2)
             data.results[1]['first'].should.equal('Romeo')
             data.results[1]['last'].should.equal('Montague')
             data.results[1]['jid'].should.equal('romeo@montague.net')
-            data.results[1]['tags'].should.eql(['friend', 'lover'])            
-            
+            data.results[1]['tags'].should.eql(['friend', 'lover'])
+
             done()
         }
-        var request = { 
+        var request = {
             to: 'characters.shakespeare.lit',
-            basic: { first: 'romeo' }            
+            basic: { first: 'romeo' }
         }
         socket.emit(
             'xmpp.search.do',
@@ -284,5 +286,5 @@ describe('Perform search', function() {
             callback
         )
     })
-    
+
 })

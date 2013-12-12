@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('should')
   , Search = require('../../lib/search')
   , ltx    = require('ltx')
@@ -25,10 +27,10 @@ describe('Incoming messages', function() {
     })
 
     describe('Handles', function() {
-        
+
         it('Returns false', function() {
             search.handles(ltx.parse('<iq/>')).should.be.false
         })
     })
-    
+
 })

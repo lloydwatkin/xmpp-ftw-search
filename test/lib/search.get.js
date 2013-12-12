@@ -1,3 +1,5 @@
+'use strict';
+
 var should = require('should')
   , Search = require('../../lib/search')
   , helper = require('../helper')
@@ -73,7 +75,7 @@ describe('Get search form', function() {
             callback
         )
     })
-    
+
     it('Sends expected stanza', function(done) {
         var request = { to: 'characters.shakespeare.lit' }
         xmpp.once('stanza', function(stanza) {
@@ -86,7 +88,7 @@ describe('Get search form', function() {
         })
         socket.emit('xmpp.search.get', request, function() {})
     })
-    
+
     it('Handles error response', function(done) {
         xmpp.once('stanza', function() {
             manager.makeCallback(helper.getStanza('iq-error'))
@@ -106,7 +108,7 @@ describe('Get search form', function() {
             callback
         )
     })
-    
+
     it('Handles basic search form', function(done) {
         xmpp.once('stanza', function() {
             manager.makeCallback(helper.getStanza('form-basic'))
@@ -116,7 +118,7 @@ describe('Get search form', function() {
             data.instructions.should.equal('Search for characters')
             data.basic.length.should.equal(4)
             data.basic.should.eql([
-                'first', 'last', 'nick', 'email'  
+                'first', 'last', 'nick', 'email'
             ])
             done()
         }
@@ -151,7 +153,7 @@ describe('Get search form', function() {
                 var: 'last',
                 type: 'text-single',
                 required: false,
-                label: 'Family Name'                
+                label: 'Family Name'
             })
             fields[2].var.should.equal('x-gender')
             fields[2].type.should.equal('list-single')
@@ -159,7 +161,7 @@ describe('Get search form', function() {
             fields[2].label.should.equal('Gender')
             fields[2].options.length.should.equal(2)
             fields[2].options[0].should.eql({
-                value: 'male', label: 'Male'  
+                value: 'male', label: 'Male'
             })
             fields[2].options[1].should.eql({
                 value: 'female', label: 'Female'
@@ -173,5 +175,5 @@ describe('Get search form', function() {
             callback
         )
     })
-    
+
 })
