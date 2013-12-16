@@ -1,7 +1,7 @@
 'use strict';
 
 var should = require('should')
-  , Search = require('../../lib/search')
+  , Search = require('../../index')
   , helper = require('../helper')
 
 describe('Get search form', function() {

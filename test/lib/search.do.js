@@ -1,10 +1,10 @@
 'use strict';
 
 var should   = require('should')
-  , Search   = require('../../lib/search')
+  , Search   = require('../../index')
   , ltx      = require('ltx')
   , helper   = require('../helper')
-  , dataForm = require('xmpp-ftw/lib/utils/xep-0004')
+  , dataForm = require('xmpp-ftw').utils['xep-0004']
 
 describe('Perform search', function() {
 
