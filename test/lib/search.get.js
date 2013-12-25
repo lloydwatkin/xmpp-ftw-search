@@ -1,5 +1,8 @@
 'use strict';
 
+
+/* jshint -W030 */
+
 var should = require('should')
   , Search = require('../../index')
   , helper = require('../helper')
@@ -161,10 +164,12 @@ describe('Get search form', function() {
             fields[2].label.should.equal('Gender')
             fields[2].options.length.should.equal(2)
             fields[2].options[0].should.eql({
-                value: 'male', label: 'Male'
+                value: 'male',
+                label: 'Male'
             })
             fields[2].options[1].should.eql({
-                value: 'female', label: 'Female'
+                value: 'female',
+                label: 'Female'
             })
             done()
         }

@@ -1,7 +1,8 @@
 'use strict';
 
-var should = require('should')
-  , Search = require('../../index')
+/* jshint -W030 */
+
+var Search = require('../../index')
   , ltx    = require('ltx')
   , helper = require('../helper')
 

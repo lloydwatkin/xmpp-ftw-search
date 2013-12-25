@@ -1,8 +1,9 @@
 'use strict';
 
+/* jshint -W030 */
+
 var should   = require('should')
   , Search   = require('../../index')
-  , ltx      = require('ltx')
   , helper   = require('../helper')
   , dataForm = require('xmpp-ftw').utils['xep-0004']
 
@@ -226,8 +227,8 @@ describe('Perform search', function() {
         var callback = function(error, data) {
             should.not.exist(error)
             data.should.eql({
-               fields: {},
-               results: []
+                fields: {},
+                results: []
             })
             done()
         }
@@ -250,29 +251,33 @@ describe('Perform search', function() {
             should.not.exist(error)
             Object.keys(data.fields).length.should.equal(4)
             data.fields.first.should.eql({
-                label: 'Given Name', type: 'text-single'
+                label: 'Given Name',
+                type: 'text-single'
             })
             data.fields.last.should.eql({
-                label: 'Family Name', type: 'text-single'
+                label: 'Family Name',
+                type: 'text-single'
             })
             data.fields.jid.should.eql({
-                label: 'Jabber ID', type: 'jid-single'
+                label: 'Jabber ID',
+                type: 'jid-single'
             })
             data.fields.tags.should.eql({
-                label: 'Tags', type: 'text-multi'
+                label: 'Tags',
+                type: 'text-multi'
             })
 
             data.results.length.should.equal(2)
-            data.results[0]['first'].should.equal('Benvolio')
-            data.results[0]['last'].should.equal('Montague')
-            data.results[0]['jid'].should.equal('benvolio@montague.net')
-            data.results[0]['tags'].should.eql(['friend'])
+            data.results[0].first.should.equal('Benvolio')
+            data.results[0].last.should.equal('Montague')
+            data.results[0].jid.should.equal('benvolio@montague.net')
+            data.results[0].tags.should.eql(['friend'])
 
             data.results.length.should.equal(2)
-            data.results[1]['first'].should.equal('Romeo')
-            data.results[1]['last'].should.equal('Montague')
-            data.results[1]['jid'].should.equal('romeo@montague.net')
-            data.results[1]['tags'].should.eql(['friend', 'lover'])
+            data.results[1].first.should.equal('Romeo')
+            data.results[1].last.should.equal('Montague')
+            data.results[1].jid.should.equal('romeo@montague.net')
+            data.results[1].tags.should.eql(['friend', 'lover'])
 
             done()
         }
