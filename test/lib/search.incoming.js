@@ -11,8 +11,8 @@ describe('Incoming messages', function() {
     var search, socket, xmpp, manager
 
     before(function() {
-        socket = new helper.Eventer()
-        xmpp = new helper.Eventer()
+        socket = new helper.SocketEventer()
+        xmpp = new helper.XmppEventer()
         manager = {
             socket: socket,
             client: xmpp,
@@ -24,6 +24,12 @@ describe('Incoming messages', function() {
             }
         }
         search = new Search()
+        search.init(manager)
+    })
+
+    beforeEach(function() {
+        socket.removeAllListeners()
+        xmpp.removeAllListeners()
         search.init(manager)
     })
 

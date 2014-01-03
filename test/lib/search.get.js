@@ -12,8 +12,8 @@ describe('Get search form', function() {
     var search, socket, xmpp, manager
 
     before(function() {
-        socket = new helper.Eventer()
-        xmpp = new helper.Eventer()
+        socket = new helper.SocketEventer()
+        xmpp = new helper.XmppEventer()
         manager = {
             socket: socket,
             client: xmpp,
@@ -25,6 +25,12 @@ describe('Get search form', function() {
             }
         }
         search = new Search()
+        search.init(manager)
+    })
+
+    beforeEach(function() {
+        socket.removeAllListeners()
+        xmpp.removeAllListeners()
         search.init(manager)
     })
 
@@ -40,7 +46,7 @@ describe('Get search form', function() {
             xmpp.removeAllListeners('stanza')
             done()
         })
-        socket.emit('xmpp.search.get', {})
+        socket.send('xmpp.search.get', {})
     })
 
     it('Errors if non-function callback provided', function(done) {
@@ -55,7 +61,7 @@ describe('Get search form', function() {
             xmpp.removeAllListeners('stanza')
             done()
         })
-        socket.emit('xmpp.search.get', {}, true)
+        socket.send('xmpp.search.get', {}, true)
     })
 
     it('Errors if no \'to\' key provided', function(done) {
@@ -72,7 +78,7 @@ describe('Get search form', function() {
             xmpp.removeAllListeners('stanza')
             done()
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.get',
             request,
             callback
@@ -89,7 +95,7 @@ describe('Get search form', function() {
             stanza.getChild('query', Search.NS).should.exist
             done()
         })
-        socket.emit('xmpp.search.get', request, function() {})
+        socket.send('xmpp.search.get', request, function() {})
     })
 
     it('Handles error response', function(done) {
@@ -105,7 +111,7 @@ describe('Get search form', function() {
             done()
         }
         var request = { to: 'characters.shakespeare.lit' }
-        socket.emit(
+        socket.send(
             'xmpp.search.get',
             request,
             callback
@@ -126,7 +132,7 @@ describe('Get search form', function() {
             done()
         }
         var request = { to: 'characters.shakespeare.lit' }
-        socket.emit(
+        socket.send(
             'xmpp.search.get',
             request,
             callback
@@ -174,7 +180,7 @@ describe('Get search form', function() {
             done()
         }
         var request = { to: 'characters.shakespeare.lit' }
-        socket.emit(
+        socket.send(
             'xmpp.search.get',
             request,
             callback

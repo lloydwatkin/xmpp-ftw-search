@@ -12,8 +12,8 @@ describe('Perform search', function() {
     var search, socket, xmpp, manager
 
     before(function() {
-        socket = new helper.Eventer()
-        xmpp = new helper.Eventer()
+        socket = new helper.SocketEventer()
+        xmpp = new helper.XmppEventer()
         manager = {
             socket: socket,
             client: xmpp,
@@ -25,6 +25,12 @@ describe('Perform search', function() {
             }
         }
         search = new Search()
+        search.init(manager)
+    })
+
+    beforeEach(function() {
+        socket.removeAllListeners()
+        xmpp.removeAllListeners()
         search.init(manager)
     })
 
@@ -40,7 +46,7 @@ describe('Perform search', function() {
             xmpp.removeAllListeners('stanza')
             done()
         })
-        socket.emit('xmpp.search.do', {})
+        socket.send('xmpp.search.do', {})
     })
 
     it('Errors if non-function callback provided', function(done) {
@@ -55,7 +61,7 @@ describe('Perform search', function() {
             xmpp.removeAllListeners('stanza')
             done()
         })
-        socket.emit('xmpp.search.do', {}, true)
+        socket.send('xmpp.search.do', {}, true)
     })
 
     it('Errors if no \'to\' key provided', function(done) {
@@ -72,7 +78,7 @@ describe('Perform search', function() {
             xmpp.removeAllListeners('stanza')
             done()
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.do',
             request,
             callback
@@ -93,7 +99,7 @@ describe('Perform search', function() {
             xmpp.removeAllListeners('stanza')
             done()
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.do',
             request,
             callback
@@ -121,7 +127,7 @@ describe('Perform search', function() {
                     query.getChildText(i).should.equal(request.basic[i])
                 done()
             })
-            socket.emit(
+            socket.send(
                 'xmpp.search.do',
                 request,
                 function() {}
@@ -145,7 +151,7 @@ describe('Perform search', function() {
                 error.request.should.eql(request)
                 done()
             }
-            socket.emit(
+            socket.send(
                 'xmpp.search.do',
                 request,
                 callback
@@ -188,7 +194,7 @@ describe('Perform search', function() {
 
                 done()
             })
-            socket.emit(
+            socket.send(
                 'xmpp.search.do',
                 request,
                 function() {}
@@ -213,7 +219,7 @@ describe('Perform search', function() {
             to: 'characters.shakespeare.lit',
             basic: { first: 'romeo' }
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.do',
             request,
             callback
@@ -236,7 +242,7 @@ describe('Perform search', function() {
             to: 'characters.shakespeare.lit',
             basic: { first: 'romeo' }
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.do',
             request,
             callback
@@ -285,7 +291,7 @@ describe('Perform search', function() {
             to: 'characters.shakespeare.lit',
             basic: { first: 'romeo' }
         }
-        socket.emit(
+        socket.send(
             'xmpp.search.do',
             request,
             callback
