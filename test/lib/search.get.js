@@ -155,18 +155,15 @@ describe('Get search form', function() {
             fields[0].should.eql({
                 var: 'first',
                 type: 'text-single',
-                required: false,
                 label: 'Given Name'
             })
             fields[1].should.eql({
                 var: 'last',
                 type: 'text-single',
-                required: false,
                 label: 'Family Name'
             })
             fields[2].var.should.equal('x-gender')
             fields[2].type.should.equal('list-single')
-            fields[2].required.should.be.false
             fields[2].label.should.equal('Gender')
             fields[2].options.length.should.equal(2)
             fields[2].options[0].should.eql({
