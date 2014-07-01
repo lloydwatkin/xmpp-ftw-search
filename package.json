@@ -28,8 +28,8 @@
     "url": "https://github.com/xmpp-ftw/xmpp-ftw-search/issues"
   },
   "dependencies": {
-    "ltx": "~0.3.3",
-    "xmpp-ftw": "1.x"
+    "xmpp-ftw": "1.x",
+    "ltx": "^0.5.2"
   },
   "devDependencies": {
     "mocha": "~1.8.1",
