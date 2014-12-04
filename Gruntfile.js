@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                     coverage: true,
                     legend: true,
                     check: {
-                        lines: 97,
+                        lines: 98,
                         statements: 98
                     },
                     root: './lib',
