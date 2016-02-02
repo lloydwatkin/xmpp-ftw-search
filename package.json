@@ -43,6 +43,6 @@
     "should": "~1.2.2"
   },
   "peerDependencies": {
-    "xmpp-ftw": "1.x"
+    "xmpp-ftw": "1.18.0"
   }
 }
