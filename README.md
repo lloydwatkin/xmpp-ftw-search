@@ -1,6 +1,8 @@
 xmpp-ftw-search
 =================
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/xmpp-ftw/xmpp-ftw-search.svg)](https://greenkeeper.io/)
+
 Jabber search (XEP-0055) plugin for XMPP-FTW.
 
 https://github.com/xmpp-ftw/xmpp-ftw.git
